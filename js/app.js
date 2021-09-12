@@ -10,6 +10,7 @@ loadProducts();
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
+
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
@@ -22,11 +23,9 @@ const showProducts = (products) => {
       <h2>Price: $ ${product.price}</h2>
       <h5>Rating: ${product.rating.rate} <span style="margin-left: 8px; font-size: 12px;">(Total People Rate: ${product.rating.count})</span></h5>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
-      `;
-    document.getElementById("all-products").appendChild(div);
+      <button id="details_btn" class="btn btn-danger">Details</button></div>
 
-    const modal = `<div id="myModal" class="modal">
+      <div id="myModal" class="modal">
     <div class="modal-content">
     <span class="close">&times;</span>
     <h3>${product.title}</h3>
@@ -34,9 +33,24 @@ const showProducts = (products) => {
       <h2>Price: $ ${product.price}</h2>
       <h5>Rating: ${product.rating.rate} <span style="margin-left: 8px; font-size: 12px;">(Total People Rate: ${product.rating.count})</span></h5>
   </div>
-  </div>`;
-
-    document.getElementById("modal").innerHTML(modal);
+  </div>
+      `;
+    // Modal
+    const modal = document.getElementById("myModal");
+    const btn = document.getElementById("details_btn");
+    const span = document.getElementsByClassName("close")[0];
+    btn.onclick = function () {
+      modal.style.display = "block";
+    }
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    document.getElementById("all-products").appendChild(div);
   }
 };
 
