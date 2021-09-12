@@ -36,7 +36,7 @@ const showProducts = (products) => {
   </div>
   </div>`;
 
-    document.getElementById("modal").appendChild(modal);
+    document.getElementById("modal").innerHTML(modal);
   }
 };
 
